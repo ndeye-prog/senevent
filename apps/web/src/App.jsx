@@ -28,8 +28,20 @@ const App = () => {
       >
         {chargement ? "Chargement..." : "Charger les événements"}
       </button>
-      {evenements.map(ev => (
-        <EvenementCarte key={ev.id} ev={ev} afficherDetails={true} />
+
+      {/* La barre de recherche est masquée temporairement pour éviter la page blanche */}
+      {/* <SearchBar recherche={recherche} onRecherche={setRecherche} /> */}
+
+      <p className={styles.compteur}>
+        {evenementsFiltres.length} evenement(s) trouve(s)
+      </p>
+
+      {evenementsFiltres.map((ev) => (
+        <EvenementCarte
+          key={ev.id}
+          ev={ev}
+          afficherDetails={true}
+        />
       ))}
     </div>
   );
