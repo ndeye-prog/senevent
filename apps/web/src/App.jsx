@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import EvenementCarte from "./components/EvenementCarte";
 import SearchBar from "./components/SearchBar";
-import EtatChargement from "./components/EtatChargement"; // 🚀 1. Nouvel Import
+import EtatChargement from "./components/EtatChargement";
 import styles from "./App.module.css";
 
 const App = () => {
@@ -30,17 +30,28 @@ const App = () => {
     }
   };
 
-  // Déclenchement automatique au montage du composant
+  // 1. Déclenchement automatique au montage du composant (Étape 1)
   useEffect(() => {
     charger();
   }, []);
+
+  // 💡 2. EXERCICE FINAL : Mesure du temps passé sur la page avec fonction de nettoyage
+  useEffect(() => {
+    const debut = Date.now(); // Enregistre l'heure au montage du composant
+
+    // Retourne la fonction de nettoyage (exécutée au démontage du composant)
+    return () => {
+      const duree = Date.now() - debut;
+      console.log("Temps sur la page :", duree, "ms");
+    };
+  }, []); // Tableau de dépendances vide pour ne s'exécuter qu'au montage/démontage
 
   // Logique de filtrage en temps réel
   const evenementsFiltres = evenements.filter((ev) =>
     ev.titre.toLowerCase().includes(recherche.toLowerCase())
   );
 
-  // Synchroniser le titre de l'onglet du navigateur avec le compteur
+  // 3. Synchroniser le titre de l'onglet du navigateur avec le compteur (Étape 3)
   useEffect(() => {
     if (evenementsFiltres.length > 0) {
       document.title = `(${evenementsFiltres.length}) SenEvent`;
@@ -53,10 +64,10 @@ const App = () => {
     <div className={styles.container}>
       <h1 className={styles.titre}>SenEvent --- Événements à Dakar</h1>
 
-      {/* 🚀 2. Rendu conditionnel modifié : Utilisation du composant EtatChargement */}
+      {/* Rendu conditionnel : État de chargement (Étape 4) */}
       {chargement && <EtatChargement />}
 
-      {/* Rendu conditionnel : État d'erreur (ERROR) */}
+      {/* Rendu conditionnel : État d'erreur */}
       {erreur && (
         <div className={styles.erreur}>
           <p>Erreur : {erreur}</p>
@@ -66,7 +77,7 @@ const App = () => {
         </div>
       )}
 
-      {/* Rendu conditionnel : État de succès (SUCCESS) */}
+      {/* Rendu conditionnel : État de succès */}
       {!chargement && !erreur && (
         <>
           <SearchBar recherche={recherche} onRecherche={setRecherche} />
