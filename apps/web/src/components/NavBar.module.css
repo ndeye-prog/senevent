@@ -23,7 +23,7 @@
   color: white;
   text-decoration: none;
   padding: 0.3rem 0;
-  border-bottom: 2px solid transparent;
+  border-bottom: 2 px solid transparent;
   transition: border-color 0.2s;
 }
 
