@@ -7,7 +7,7 @@ import styles from "./Accueil.module.css";
 const Accueil = ({ evenements, chargement, erreur, onReessayer }) => {
   const [recherche, setRecherche] = useState("");
 
-  const evenementsFiltres = evenements.filter(ev =>
+  const evenementsFiltres = evenements.filter((ev) =>
     ev.titre.toLowerCase().includes(recherche.toLowerCase())
   );
 
@@ -19,14 +19,12 @@ const Accueil = ({ evenements, chargement, erreur, onReessayer }) => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.titre}>SenEvent - Evenements a Dakar</h1>
-
+      <h1 className={styles.titre}>SenEvent — Evenements a Dakar</h1>
       <EtatChargement
         chargement={chargement}
         erreur={erreur}
         onReessayer={onReessayer}
       />
-
       {!chargement && !erreur && (
         <>
           <SearchBar recherche={recherche} onRecherche={setRecherche} />
@@ -34,11 +32,9 @@ const Accueil = ({ evenements, chargement, erreur, onReessayer }) => {
             {evenementsFiltres.length} evenement(s) trouve(s)
           </p>
           {evenementsFiltres.length === 0 ? (
-            <p className={styles.messageVide}>
-              Aucun evenement ne correspond.
-            </p>
+            <p className={styles.messageVide}>Aucun evenement ne correspond.</p>
           ) : (
-            evenementsFiltres.map(ev => (
+            evenementsFiltres.map((ev) => (
               <EvenementCarte key={ev.id} ev={ev} afficherDetails={true} />
             ))
           )}

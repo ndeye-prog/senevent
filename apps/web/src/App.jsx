@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Accueil from "./pages/Accueil";
@@ -30,7 +31,7 @@ const App = () => {
   }, []);
 
   const ajouterEvenement = (nouvel) => {
-    setEvenements(precedents => [nouvel, ...precedents]);
+    setEvenements((precedents) => [nouvel, ...precedents]);
   };
 
   return (
