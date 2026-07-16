@@ -27,41 +27,56 @@ const App = () => {
     return () => subscription.subscription.unsubscribe();
   }, []);
 
+  // Lit les evenements depuis Supabase (SELECT) au lieu du mock JSON
   const charger = async () => {
     setChargement(true);
     setErreur(null);
-    try {
-      const reponse = await fetch("/evenements.json");
-      if (!reponse.ok) throw new Error(`Erreur HTTP ${reponse.status}`);
-      const data = await reponse.json();
+
+    const { data, error } = await supabase
+      .from("evenements")
+      .select("*")
+      .order("date_debut", { ascending: true });
+
+    if (error) {
+      setErreur(error.message);
+    } else {
       setEvenements(data);
-    } catch (e) {
-      setErreur(e.message);
-    } finally {
-      setChargement(false);
     }
+
+    setChargement(false);
   };
 
-  useEffect(() => { charger(); }, []);
+  useEffect(() => {
+    charger();
+  }, []);
 
   const ajouterEvenement = (nouvel) => {
-    setEvenements(precedents => [nouvel, ...precedents]);
+    setEvenements((precedents) => [nouvel, ...precedents]);
   };
 
   return (
     <BrowserRouter>
       <NavBar session={session} />
       <Routes>
-        <Route path="/" element={
-          <Accueil
-            evenements={evenements}
-            chargement={chargement}
-            erreur={erreur}
-            onReessayer={charger}
-          />
-        } />
-        <Route path="/nouveau" element={<NouvelEvenement onAjouter={ajouterEvenement} />} />
-        <Route path="/evenement/:id" element={<Detail evenements={evenements} />} />
+        <Route
+          path="/"
+          element={
+            <Accueil
+              evenements={evenements}
+              chargement={chargement}
+              erreur={erreur}
+              onReessayer={charger}
+            />
+          }
+        />
+        <Route
+          path="/nouveau"
+          element={<NouvelEvenement onAjouter={ajouterEvenement} />}
+        />
+        <Route
+          path="/evenement/:id"
+          element={<Detail evenements={evenements} />}
+        />
         <Route path="/auth" element={<Auth />} />
       </Routes>
     </BrowserRouter>
