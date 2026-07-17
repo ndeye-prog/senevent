@@ -1,16 +1,19 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
+import BoutonInscription from "../components/BoutonInscription";
 import styles from "./Detail.module.css";
 
-const Detail = ({ evenements }) => {
+const Detail = ({ evenements, session }) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const evenement = evenements.find(ev => ev.id === Number(id));
+  const evenement = evenements.find((ev) => ev.id === Number(id));
 
   if (!evenement) {
     return (
       <div className={styles.container}>
         <p>Evenement introuvable.</p>
-        <Link to="/" className={styles.retour}>Retour a la liste</Link>
+        <Link to="/" className={styles.retour}>
+          Retour a la liste
+        </Link>
       </div>
     );
   }
@@ -40,6 +43,7 @@ const Detail = ({ evenements }) => {
         <dt>Prix</dt>
         <dd className={styles.prix}>{prix}</dd>
       </dl>
+      <BoutonInscription evenementId={evenement.id} session={session} />
     </div>
   );
 };
