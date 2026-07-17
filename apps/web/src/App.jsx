@@ -27,7 +27,6 @@ const App = () => {
     return () => subscription.subscription.unsubscribe();
   }, []);
 
-  // Lit les evenements depuis Supabase (SELECT) au lieu du mock JSON
   const charger = async () => {
     setChargement(true);
     setErreur(null);
@@ -50,10 +49,6 @@ const App = () => {
     charger();
   }, []);
 
-  const ajouterEvenement = (nouvel) => {
-    setEvenements((precedents) => [nouvel, ...precedents]);
-  };
-
   return (
     <BrowserRouter>
       <NavBar session={session} />
@@ -71,7 +66,7 @@ const App = () => {
         />
         <Route
           path="/nouveau"
-          element={<NouvelEvenement onAjouter={ajouterEvenement} />}
+          element={<NouvelEvenement onAjoutReussi={charger} />}
         />
         <Route
           path="/evenement/:id"
