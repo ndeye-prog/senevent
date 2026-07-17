@@ -1,4 +1,5 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { supabase } from "../lib/supabase";
 import BoutonInscription from "../components/BoutonInscription";
 import styles from "./Detail.module.css";
 
@@ -6,6 +7,22 @@ const Detail = ({ evenements, session }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const evenement = evenements.find((ev) => ev.id === Number(id));
+
+  const supprimer = async () => {
+    const confirme = window.confirm("Supprimer cet evenement ?");
+    if (!confirme) return;
+
+    const { error } = await supabase
+      .from("evenements")
+      .delete()
+      .eq("id", evenement.id);
+
+    if (error) {
+      alert("Erreur : " + error.message);
+    } else {
+      navigate("/");
+    }
+  };
 
   if (!evenement) {
     return (
@@ -44,6 +61,11 @@ const Detail = ({ evenements, session }) => {
         <dd className={styles.prix}>{prix}</dd>
       </dl>
       <BoutonInscription evenementId={evenement.id} session={session} />
+      {session && session.user.id === evenement.organisateur_id && (
+        <button onClick={supprimer} className={styles.supprimer}>
+          Supprimer cet evenement
+        </button>
+      )}
     </div>
   );
 };
