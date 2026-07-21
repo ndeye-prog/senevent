@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../lib/supabase";
+import { creerEvenement, getSupabase } from "@senevent-officiel/shared";
 import styles from "./NouvelEvenement.module.css";
 
 const NouvelEvenement = ({ onAjoutReussi }) => {
@@ -41,7 +41,7 @@ const NouvelEvenement = ({ onAjoutReussi }) => {
 
     const {
       data: { user },
-    } = await supabase.auth.getUser();
+    } = await getSupabase().auth.getUser();
 
     if (!user) {
       setErreurServeur("Vous devez etre connecte.");
@@ -49,22 +49,21 @@ const NouvelEvenement = ({ onAjoutReussi }) => {
       return;
     }
 
-    const { error } = await supabase.from("evenements").insert({
-      titre: titre.trim(),
-      categorie,
-      lieu_nom: lieu.trim(),
-      prix: Number(prix),
-      date_debut: new Date().toISOString(),
-      organisateur_id: user.id,
-    });
-
-    setEnCours(false);
-
-    if (error) {
-      setErreurServeur(error.message);
-    } else {
+    try {
+      await creerEvenement({
+        titre: titre.trim(),
+        categorie,
+        lieu_nom: lieu.trim(),
+        prix: Number(prix),
+        date_debut: new Date().toISOString(),
+        organisateur_id: user.id,
+      });
       onAjoutReussi();
       navigate("/");
+    } catch (e) {
+      setErreurServeur(e.message);
+    } finally {
+      setEnCours(false);
     }
   };
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { supabase } from "../lib/supabase";
+import { estInscrit, inscrire, desinscrire } from "@senevent-officiel/shared";
 import styles from "./BoutonInscription.module.css";
 
 const BoutonInscription = ({ evenementId, session }) => {
@@ -12,33 +12,29 @@ const BoutonInscription = ({ evenementId, session }) => {
         setChargement(false);
         return;
       }
-      const { data } = await supabase
-        .from("inscriptions")
-        .select("id")
-        .eq("evenement_id", evenementId)
-        .eq("utilisateur_id", session.user.id);
-
-      setInscrit(data && data.length > 0);
+      const resultat = await estInscrit(evenementId, session.user.id);
+      setInscrit(resultat);
       setChargement(false);
     };
     verifier();
   }, [evenementId, session]);
 
   const sInscrire = async () => {
-    const { error } = await supabase.from("inscriptions").insert({
-      evenement_id: evenementId,
-      utilisateur_id: session.user.id,
-    });
-    if (!error) setInscrit(true);
+    try {
+      await inscrire(evenementId, session.user.id);
+      setInscrit(true);
+    } catch (e) {
+      alert("Erreur : " + e.message);
+    }
   };
 
   const seDesinscrire = async () => {
-    const { error } = await supabase
-      .from("inscriptions")
-      .delete()
-      .eq("evenement_id", evenementId)
-      .eq("utilisateur_id", session.user.id);
-    if (!error) setInscrit(false);
+    try {
+      await desinscrire(evenementId, session.user.id);
+      setInscrit(false);
+    } catch (e) {
+      alert("Erreur : " + e.message);
+    }
   };
 
   if (!session) {
