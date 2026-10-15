@@ -1,17 +1,17 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { useRouter } from "expo-router";
+import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 
 export default function EvenementCarte({ evenement }) {
-  const prix = evenement.prix === 0
-    ? "Gratuit"
-    : `${evenement.prix} FCFA`;
+  const router = useRouter();
+  const prix = evenement.prix === 0 ? "Gratuit" : `${evenement.prix} FCFA`;
 
   return (
-    <View style={styles.carte}>
+    <Pressable
+      style={styles.carte}
+      onPress={() => router.push(`/evenement/${evenement.id}`)}
+    >
       {evenement.image_url && (
-        <Image
-          source={{ uri: evenement.image_url }}
-          style={styles.image}
-        />
+        <Image source={{ uri: evenement.image_url }} style={styles.image} />
       )}
       <View style={styles.contenu}>
         <Text style={styles.titre}>{evenement.titre}</Text>
@@ -21,7 +21,7 @@ export default function EvenementCarte({ evenement }) {
           <Text style={styles.prix}>{prix}</Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
@@ -38,23 +38,10 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     shadowOffset: { width: 0, height: 2 },
   },
-  image: {
-    width: "100%",
-    height: 150,
-  },
-  contenu: {
-    padding: 12,
-  },
-  titre: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#1a3a5c",
-  },
-  lieu: {
-    fontSize: 13,
-    color: "#666",
-    marginTop: 4,
-  },
+  image: { width: "100%", height: 150 },
+  contenu: { padding: 12 },
+  titre: { fontSize: 16, fontWeight: "bold", color: "#1a3a5c" },
+  lieu: { fontSize: 13, color: "#666", marginTop: 4 },
   pied: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -70,9 +57,5 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     textTransform: "uppercase",
   },
-  prix: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#ea7d2b",
-  },
+  prix: { fontSize: 14, fontWeight: "bold", color: "#ea7d2b" },
 });

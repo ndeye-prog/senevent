@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@expo/metro-runtime": "~57.0.17",
+    "@expo/vector-icons": "^15.0.2",
     "@senevent-officiel/shared": "*",
     "@supabase/supabase-js": "^2.0.0",
     "expo": "^57",
