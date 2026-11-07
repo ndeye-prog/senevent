@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { StyleSheet, Text, FlatList, ActivityIndicator } from "react-native";
+import { useFocusEffect } from "expo-router";
 import { getEvenements } from "@senevent-officiel/shared";
 import EvenementCarte from "../../components/EvenementCarte";
 
@@ -9,24 +10,29 @@ export default function Evenements() {
   const [erreur, setErreur] = useState(null);
   const [rafraichissement, setRafraichissement] = useState(false);
 
-  useEffect(() => {
-    const charger = async () => {
-      try {
-        const data = await getEvenements();
-        setEvenements(data);
-      } catch (e) {
-        setErreur(e.message);
-      } finally {
-        setChargement(false);
-      }
-    };
-    charger();
-  }, []);
+  // Recharge a chaque fois que l'ecran redevient visible
+  useFocusEffect(
+    useCallback(() => {
+      const charger = async () => {
+        try {
+          const data = await getEvenements();
+          setEvenements(data);
+          setErreur(null);
+        } catch (e) {
+          setErreur(e.message);
+        } finally {
+          setChargement(false);
+        }
+      };
+      charger();
+    }, [])
+  );
 
   const rafraichir = async () => {
     setRafraichissement(true);
     try {
       setEvenements(await getEvenements());
+      setErreur(null);
     } catch (e) {
       setErreur(e.message);
     } finally {
