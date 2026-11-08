@@ -7,12 +7,22 @@ const EvenementCarte = ({ ev, afficherDetails }) => {
   return (
     <Link to={`/evenement/${ev.id}`} className={styles.lien}>
       <div className={styles.carte}>
-        <h3 className={styles.titre}>{ev.titre}</h3>
-        <p className={styles.info}>Categorie : {ev.categorie}</p>
-        {afficherDetails && (
-          <p className={styles.info}>Lieu : {ev.lieu_nom}</p>
+        {ev.image_url && (
+          <img
+            src={ev.image_url}
+            alt={ev.titre}
+            className={styles.image}
+            loading="lazy"
+          />
         )}
-        <p className={styles.prix}>{prix}</p>
+        <div className={styles.contenu}>
+          <h3 className={styles.titre}>{ev.titre}</h3>
+          <p className={styles.info}>Categorie : {ev.categorie}</p>
+          {afficherDetails && (
+            <p className={styles.info}>Lieu : {ev.lieu_nom}</p>
+          )}
+          <p className={styles.prix}>{prix}</p>
+        </div>
       </div>
     </Link>
   );
