@@ -1,32 +1,33 @@
 .info {
-  color: #555;
-  font-style: italic;
+  color: var(--texte-secondaire);
+  font-size: 0.9rem;
 }
 
 .inscrire {
-  padding: 0.5rem 1rem;
-  background: #3aa84d;
-  color: white;
+  background: var(--orange-500);
+  color: #fff;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-sm);
   font-weight: 600;
+  transition: background 0.2s ease;
 }
 
 .inscrire:hover {
-  background: #2d8a3d;
+  background: var(--orange-600);
 }
 
 .desinscrire {
-  padding: 0.5rem 1rem;
-  background: #ea7d2b;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--marine-800);
+  color: var(--marine-800);
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-sm);
   font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .desinscrire:hover {
-  background: #c9691f;
+  background: var(--marine-800);
+  color: #fff;
 }

@@ -1,18 +1,24 @@
 .conteneur {
-  margin: 1rem 0;
+  margin-bottom: 0.5rem;
 }
 
 .input {
   width: 100%;
-  padding: 0.6rem 1rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-sizing: border-box;
-  transition: border-color 0.2s;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--texte);
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--bordure);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  transition: border-color 0.2s ease;
+}
+
+.input::placeholder {
+  color: var(--texte-secondaire);
 }
 
 .input:focus {
   outline: none;
-  border-color: #1a3a5c;
+  border-color: var(--orange-500);
 }

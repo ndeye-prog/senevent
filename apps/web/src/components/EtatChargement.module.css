@@ -1,22 +1,32 @@
-.chargement {
-    text-align: center;
-    color: #0056b3;
-    font-weight: bold;
-    font-style: italic;
-    padding: 2rem;
-    animation: clignoter 1.5s infinite ease-in-out;
+.message {
+  text-align: center;
+  color: var(--texte-secondaire);
+  font-size: 0.95rem;
+  padding: 4rem 0;
 }
 
-@keyframes clignoter {
-    0% {
-        opacity: 0.4;
-    }
+.erreur {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-radius: var(--radius-md);
+  color: #B91C1C;
+  margin: 1.5rem 0;
+}
 
-    50% {
-        opacity: 1;
-    }
+.bouton {
+  margin-top: 1rem;
+  background: #fff;
+  border: 1px solid #B91C1C;
+  color: #B91C1C;
+  padding: 0.6rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
 
-    100% {
-        opacity: 0.4;
-    }
+.bouton:hover {
+  background: #B91C1C;
+  color: #fff;
 }

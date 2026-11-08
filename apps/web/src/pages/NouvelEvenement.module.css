@@ -1,49 +1,70 @@
 .form {
+  max-width: 480px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background: var(--surface);
+  border: 1px solid var(--bordure);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--ombre);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  max-width: 500px;
-  margin: 1rem auto;
+  gap: 1.25rem;
+}
+
+.form h2 {
+  font-size: 1.5rem;
+  color: var(--marine-900);
+  margin-bottom: 0.25rem;
 }
 
 .champ {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  font-weight: 600;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--texte-secondaire);
 }
 
 .champ input,
 .champ select {
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-weight: normal;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--texte);
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--bordure);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  transition: border-color 0.2s ease;
 }
 
 .champ input:focus,
 .champ select:focus {
   outline: none;
-  border-color: #1a3a5c;
+  border-color: var(--orange-500);
 }
 
 .erreur {
-  color: #a01a1a;
+  color: #dc2626;
   font-size: 0.85rem;
-  font-weight: normal;
 }
 
 .bouton {
-  padding: 0.6rem;
-  font-size: 1rem;
-  background: #1a3a5c;
-  color: white;
+  background: var(--orange-500);
+  color: #fff;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  padding: 0.8rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.2s ease;
 }
 
 .bouton:hover {
-  background: #2a4d70;
+  background: var(--orange-600);
+}
+
+.bouton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

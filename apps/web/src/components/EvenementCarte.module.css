@@ -1,32 +1,37 @@
+.lien {
+  display: block;
+}
+
 .carte {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  margin: 0.8rem 0;
-  border-radius: 8px;
-  transition: box-shadow 0.2s, transform 0.2s;
+  background: var(--surface);
+  border: 1px solid var(--bordure);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
 .carte:hover {
-  box-shadow: 0 4px 12px rgba(26, 58, 92, 0.15);
   transform: translateY(-2px);
+  box-shadow: var(--ombre);
+  border-color: var(--orange-500);
 }
 
 .titre {
-  margin: 0 0 0.5rem 0;
-  color: #1a3a5c;
+  font-size: 1.2rem;
+  color: var(--marine-900);
+  margin-bottom: 0.5rem;
 }
 
 .info {
-  margin: 0.2rem 0;
-  color: #555;
+  color: var(--texte-secondaire);
+  font-size: 0.88rem;
+  margin: 0.15rem 0;
 }
 
 .prix {
-  margin: 0.5rem 0 0 0;
-  color: #ea7d2b;
-  font-weight: bold;
-}
-.lien {
-  text-decoration: none;
-  color: inherit;
+  color: var(--orange-600);
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-top: 0.75rem;
 }

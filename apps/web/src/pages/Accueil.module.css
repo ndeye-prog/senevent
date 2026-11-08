@@ -1,43 +1,28 @@
 .container {
-  max-width: 700px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 1rem;
-  font-family: sans-serif;
+  padding: 0 1.5rem 5rem;
 }
 
 .titre {
+  font-size: 2.75rem;
+  color: var(--marine-900);
   text-align: center;
-  color: #1a3a5c;
+  padding: 4rem 1rem 3rem;
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.15;
 }
 
 .compteur {
-  text-align: center;
-  color: #888;
-  margin: 1rem 0;
+  color: var(--texte-secondaire);
+  font-size: 0.9rem;
+  margin: 1.5rem 0 1.25rem;
 }
 
-.message {
-  text-align: center;
-  color: #666;
-  font-style: italic;
-  padding: 2rem;
-}
-
-.erreur {
-  background: #fee;
-  border: 1px solid #fcc;
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 1rem 0;
-  color: #a01a1a;
-}
-
-.erreur button {
-  margin-top: 0.5rem;
-}
 .messageVide {
+  color: var(--texte-secondaire);
   text-align: center;
-  color: #888;
-  font-style: italic;
-  padding: 1rem;
+  padding: 3rem 0;
+  font-size: 0.95rem;
 }
