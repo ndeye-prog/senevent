@@ -31,6 +31,17 @@
         }
       ]
     ],
-    "scheme": "senevent"
+    "scheme": "senevent",
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "43f6a28b-087c-467d-989d-c3b7ae2f43b0"
+      }
+    },
+    "owner": "ndeye-khoudia"
   }
 }
